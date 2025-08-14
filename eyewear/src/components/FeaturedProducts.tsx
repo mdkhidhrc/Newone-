@@ -28,7 +28,7 @@ export default function FeaturedProducts() {
 					{products.map((p) => (
 						<article key={p.id} className="card overflow-hidden group">
 							<div className="aspect-square w-full bg-foreground/5">
-								<img src={p.image} alt={p.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="lazy" />
+								<img src={p.image} alt={p.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="lazy" decoding="async" />
 							</div>
 							<div className="p-4">
 								<h3 className="font-semibold">{p.title}</h3>
