@@ -1,0 +1,1 @@
+Images and media used by the app can be placed here if not in /public.

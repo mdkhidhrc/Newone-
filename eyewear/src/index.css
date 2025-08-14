@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design System - Semantic tokens (HSL only) */
+:root {
+	/* Brand */
+	--brand-primary: 268 90% 65%;
+	--brand-primary-glow: 268 100% 75%;
+	--brand-accent: 190 95% 45%;
+	--brand-accent-glow: 190 100% 60%;
+
+	/* Base */
+	--background: 240 10% 4%;
+	--foreground: 0 0% 98%;
+	--muted: 240 4% 16%;
+	--muted-foreground: 240 5% 64%;
+	--card: 240 5% 8%;
+	--card-foreground: 0 0% 98%;
+	--border: 240 6% 18%;
+	--input: 240 5% 20%;
+
+	/* Component */
+	--ring: var(--brand-primary);
+	--radius-sm: 0.5rem;
+	--radius: 0.8rem;
+	--radius-lg: 1.25rem;
+
+	/* Shadows */
+	--shadow-elegant: 0 10px 30px -10px hsl(var(--brand-primary) / 0.35);
+	--shadow-glow: 0 0 40px hsl(var(--brand-accent-glow) / 0.45);
+
+	/* Gradients */
+	--gradient-primary: linear-gradient(135deg, hsl(var(--brand-primary)), hsl(var(--brand-accent)));
+	--gradient-surface: linear-gradient(180deg, hsl(var(--card) / 0.9), hsl(var(--card) / 0.6));
+
+	/* Motion */
+	--ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@layer base {
+	html, body, #root { height: 100%; }
+	body {
+		background-color: hsl(var(--background));
+		color: hsl(var(--foreground));
+		font-family: 'Sora', system-ui, -apple-system, Segoe UI, Roboto, Inter, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+	* { border-color: hsl(var(--border)); }
+	::selection { background: hsl(var(--brand-primary) / 0.25); color: hsl(var(--foreground)); }
+}
+
+@layer components {
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.25rem;
+		border-radius: var(--radius);
+		font-weight: 600;
+		transition: transform 200ms var(--ease-smooth), box-shadow 300ms var(--ease-smooth), background-color 300ms var(--ease-smooth), opacity 300ms var(--ease-smooth);
+		cursor: pointer;
+		border: 1px solid transparent;
+		text-decoration: none;
+	}
+	.btn:focus-visible {
+		outline: 2px solid hsl(var(--ring));
+		outline-offset: 2px;
+	}
+	.btn:active { transform: scale(0.98); }
+
+	.btn-primary {
+		background: var(--gradient-primary);
+		color: hsl(var(--foreground) / 0.95);
+		box-shadow: var(--shadow-glow);
+	}
+	.btn-primary:hover { filter: brightness(0.98); }
+
+	.btn-ghost {
+		background-color: hsl(var(--foreground) / 0.05);
+		color: hsl(var(--foreground));
+		border-color: hsl(var(--foreground) / 0.1);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+	}
+	.btn-ghost:hover { background-color: hsl(var(--foreground) / 0.1); }
+
+	.card {
+		border-radius: var(--radius-lg);
+		border: 1px solid hsl(var(--foreground) / 0.1);
+		background: hsl(var(--foreground) / 0.05);
+		backdrop-filter: blur(14px);
+		-webkit-backdrop-filter: blur(14px);
+		box-shadow: 0 10px 30px -12px hsl(var(--brand-primary) / 0.35);
+	}
+
+	.navbar {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		width: 100%;
+		background-color: hsl(var(--background) / 0.45);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border-bottom: 1px solid hsl(var(--foreground) / 0.1);
+	}
+}
+
+@layer utilities {
+	.glow-primary { box-shadow: 0 0 0 0 hsl(var(--brand-primary) / 0.0); }
+	.glow-primary:hover { box-shadow: 0 10px 40px -10px hsl(var(--brand-primary) / 0.6); }
+	.text-gradient {
+		background: var(--gradient-primary);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+	.glass { background-color: hsl(var(--foreground) / 0.06); border: 1px solid hsl(var(--foreground) / 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+	@keyframes fade-up { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+	.animate-fade-up { animation: fade-up 700ms var(--ease-smooth) both; }
+}
